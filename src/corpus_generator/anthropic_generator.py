@@ -1,8 +1,9 @@
-from .base_generator import TextGenerator
-class AnthropicGenerator(TextGenerator):
+from anthropic import Anthropic
+
+class AnthropicGenerator:
     def __init__(self, model_name: str, api_key: str, temperature: float = 0.7):
-        super().__init__(model_name, temperature)
-        from anthropic import Anthropic
+        self.model_name = model_name
+        self.temperature = temperature
         self.client = Anthropic(api_key=api_key)
     
     def generate(self, prompt: str, max_tokens: int = 200) -> str:
